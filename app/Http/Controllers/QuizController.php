@@ -41,6 +41,23 @@ class QuizController extends Controller
         ]);
     }
 
+    public function result()
+    {
+        return view('learners/quiz_result');
+    }
+
+    /*
+    public function show_quiz(Quiz $quiz, Choice $choice, $title)
+    {
+        $quiz = Quiz::where('title', 'テストクイズ')->distinct()->select('title');
+        //dd($quiz);
+        return view('learners/show_quiz')->with([
+            'quiz' => $quiz, 
+            'choice' => $choice,
+            'quizzes' => $quiz->get()
+        ]);
+    }
+    */
     public function update(Request $request, Quiz $quiz)
     {
         $input_quiz = $request['quiz'];
@@ -56,9 +73,16 @@ class QuizController extends Controller
 
     public function challenge(Quiz $quiz, Choice $choice)
     {
+        //$title = $request->input('title');
+        $quizzes = Quiz::where('title', $_GET['title'])->get();
+        //$times = Quiz::where('title', $_GET['title'])->select('time')->get();
+        //$choices = Choice::where('quiz_id', $quizzes->id)->get();
         return view('learners/challenge_quiz')->with([
             'quiz' => $quiz,
-            'choice' => $choice
+            'choice' => $choice,
+            'quizzes' => $quizzes,
+            //'times' => $times
+            //'choices' => $choices
         ]);
     }
 

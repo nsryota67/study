@@ -17,6 +17,7 @@ use App\Http\Controllers\QuizController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/learners/{learner}', [StudyController::class, 'index']);
 
@@ -40,9 +41,13 @@ Route::get('/learners/quizzes/edit_quiz/{quiz}', [QuizController::class, 'edit']
 
 Route::get('/learners/choice/edit_choice/{choice}', [ChoiceController::class, 'edit']);
 
-Route::get('/learners/quizzes/challenge_quiz/{quiz}', [QuizController::class, 'challenge']);
+Route::get('/learners/quizzes/challenge_quiz', [QuizController::class, 'challenge']);
 
 Route::get('/learners/quizzes/{quiz}', [QuizController::class, 'show']);
+
+Route::get('/learners/quizzes/show_quiz/{learner}', [QuizController::class, 'show_quiz']);
+
+Route::get('/learners/quiz_result', [QuizController::class, 'result']);
 
 Route::post('/quizzes', [QuizController::class, 'store']);
 
@@ -70,3 +75,7 @@ Route::delete('/learners/choices/{choice}', [ChoiceController::class, 'delete'])
 
 
 
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

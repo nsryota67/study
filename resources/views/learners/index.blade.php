@@ -23,13 +23,7 @@
             @endforeach
             <p>{{ $quizzes->links('pagination::bootstrap-4') }}</p>
         </div>
-        <div class="challenge">
-        <h2>クイズに挑戦！</h2>
-            @foreach ($quizzes as $quiz)
-                <a href="/learners/quizzes/challenge_quiz/{{ $quiz->id }}">{{ $quiz->title }}</a>
-            @endforeach
-            <p>{{ $notes->links('pagination::bootstrap-4') }}</p>
-        </div>
+        
         <div class="goal">
         <h2>目標一覧</h2>
             @foreach ($goals as $goal)
@@ -46,6 +40,13 @@
             @endforeach
             <p>{{ $goals->links('pagination::bootstrap-4') }}</p>
         </div>
+        <div class="challenge">
+        <h2>クイズに挑戦！</h2>
+            @foreach ($quizzes as $quiz)
+                <a href="/learners/quizzes/challenge_quiz?title={{ $quiz->title }}">{{ $quiz->title }}</a>
+            @endforeach
+            <p>{{ $quizzes->links('pagination::bootstrap-4') }}</p>
+        </div>
         <div class="create_note">
             [<a href='learners/create_note/{{ $learner->id }}'>ノートを作成する</a>]
         </div>
@@ -53,6 +54,10 @@
         <div class="set_quiz">
             [<a href='/learners/create_quiz/{{ $learner->id }}'>クイズを作成する</a>]
         </div>
+
+        {{--<div class="challenge">
+            [<a href="/learners/quizzes/show_quiz/{{ $learner->id }}">クイズに挑戦する</a>]
+        </div> --}}
 
         <div class="set_goal">
             [<a href='goals/goal/{{ $learner->id }}'>目標を設定する</a>]

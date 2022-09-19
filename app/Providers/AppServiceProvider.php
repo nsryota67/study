@@ -13,7 +13,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        /*
+        \URL::forceScheme('https');
+        $this->app['request']->server->set('HTTPs','on');
+        */
     }
 
     /**
@@ -23,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /*
+        \URL::forceScheme('https');
+        $this->app['request']->server->set('HTTPs','on');
+        */
+        
     }
 }
