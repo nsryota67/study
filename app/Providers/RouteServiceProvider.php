@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/learners/{learner}';
+    //$user_id = Auth::id();
+    public const HOME = '/learners';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

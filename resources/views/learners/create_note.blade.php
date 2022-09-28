@@ -25,7 +25,7 @@
                 <input type="text" name="note[category]" placeholder="分野を入力してください。"/>
             </div>
             <div class="user_id">
-                <input type="hidden" name="note[user_id]" value="{{ $learner->id }}"/>
+                <input type="hidden" name="note[user_id]" value="{{ Auth::user()->id }}"/>
             </div>
             <div class="grade">
                 <p>学年を選択してください</p>
@@ -50,7 +50,7 @@
             <input type="submit" value="保存"/>
         </form>
         <div class="back">
-            [<a href="/learners/{{ $learner->id }}">back</a>]
+            [<a href="/learners">back</a>]
         </div>
     </body>
 </html>

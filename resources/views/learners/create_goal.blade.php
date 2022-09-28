@@ -19,7 +19,7 @@
                 <input type="date" name="goal[goal_date]" placeholder="YYYY-MM-DD"/>
             </div>
             <div class="user_id">
-                <input type="hidden" name="goal[user_id]" value="{{ $learner->id }}"/>
+                <input type="hidden" name="goal[user_id]" value="{{ Auth::user()->id }}"/>
             </div>
             <input type="submit" value="保存"/>
         </form>

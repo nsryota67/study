@@ -41,6 +41,6 @@
             <br>
             <input type="submit" value="保存"/>
         </form>
-        <div class="back">[<a href="/">back</a>]</div>
+        <div class="back">[<a href="/learners">back</a>]</div>
     </body>
 </html>

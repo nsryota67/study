@@ -61,6 +61,6 @@
             </div>
             <input type="submit" value="保存"/>
         </form>
-        <div class="back">[<a href="/learners/{{ $learner->id }}">back</a>]</div>
+        <div class="back">[<a href="/learners/{{ Auth::user()->id }}">back</a>]</div>
     </body>
 </html>

@@ -41,9 +41,35 @@ class QuizController extends Controller
         ]);
     }
 
-    public function result()
+    public function result(Request $request, Quiz $quiz)
     {
-        return view('learners/quiz_result');
+        $quiz_arr = [];
+        $choices = [];
+        
+        $answer_arr = [];
+        $count = $request['count'];
+        $quiz_title = $request['title'];
+        //dd($quiz_title);
+        $quizzes = Quiz::where('title', $quiz_title)->get();
+        
+        foreach ($quizzes as $quiz) {
+            array_push($quiz_arr, $quiz->id);
+        }
+        
+        for($i = 0; $i < count($quizzes); $i++) {
+            array_push($choices, Choice::where('quiz_id', $quiz_arr[$i])->first());
+        }
+        //ここまではオッケー！
+        
+        for($i = 0; $i < $count; $i++) {
+            array_push($answer_arr, $request['q'.$i]);
+        }
+        
+        return view('learners/quiz_result')->with([
+            'answer_arr' => $answer_arr,
+            'count' => $count,
+            'choices' => $choices
+        ]);
     }
 
     /*
@@ -73,16 +99,27 @@ class QuizController extends Controller
 
     public function challenge(Quiz $quiz, Choice $choice)
     {
-        //$title = $request->input('title');
         $quizzes = Quiz::where('title', $_GET['title'])->get();
-        //$times = Quiz::where('title', $_GET['title'])->select('time')->get();
-        //$choices = Choice::where('quiz_id', $quizzes->id)->get();
+        $quiz_arr = [];
+        $choices = [];
+        foreach ($quizzes as $quiz) {
+            array_push($quiz_arr, $quiz->id);
+        }
+
+        //dd($quiz_arr);
+        //$choices = Choice::where('quiz_id', $_GET['id'])->get();
+        $title = Quiz::where('title', $_GET['title'])->first();
+        for($i = 0; $i < count($quizzes); $i++) {
+            array_push($choices, Choice::where('quiz_id', $quiz_arr[$i])->first());
+        }
+        //$choices = Choice::where('quiz_id', )->get();
+        //dd($choices[4]->choice1);
         return view('learners/challenge_quiz')->with([
             'quiz' => $quiz,
             'choice' => $choice,
+            'choices' => $choices,
             'quizzes' => $quizzes,
-            //'times' => $times
-            //'choices' => $choices
+            'title' => $title
         ]);
     }
 

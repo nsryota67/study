@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Learner;
 use App\Models\Note;
 use App\Models\Quiz;
@@ -11,21 +13,24 @@ use App\Models\Goal;
 
 class StudyController extends Controller
 {
-    public function index(Learner $learner, Note $note, Quiz $quiz, Goal $goal)
+    public function index(User $user, Note $note, Quiz $quiz, Goal $goal)
     {
         $today = Carbon::today();
         $now = Carbon::now();
-        //$user_note = Note::where('user_id', '1')->get();
+        $user_id = Auth::user()->id;
+        $notes = Note::where('user_id', $user_id)->paginate(3);
+        $quizzes = Quiz::where('user_id', $user_id)->paginate(3);
+        $goals = Goal::where('user_id', $user_id)->paginate(3);
         return view('learners/index')->with([
-            'learner' => $learner,
+            'user' => $user,
             'note' => $note,
             'quiz' => $quiz,
             'goal' => $goal,
             'today' => $today,
             'now' => $now,
-            'notes' => $note->getPaginateByLimit(),
-            'quizzes' => $quiz->getPaginateByLimit(),
-            'goals' => $goal->getPaginateByLimit()
+            'notes' => $notes,
+            'quizzes' => $quizzes,
+            'goals' => $goals
         ]);
     }
 

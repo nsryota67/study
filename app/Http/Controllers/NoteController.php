@@ -3,24 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Learner;
+use App\Models\User;
 use App\Models\Note;
 
 class NoteController extends Controller
 {
-    public function show(Note $note, Learner $learner)
+    public function show(Note $note, User $user)
     {
-        return view('learners/note')->with(['note' => $note, 'learner' => $learner]);
+        return view('learners/note')->with(['note' => $note, 'user' => $user]);
     }
 
-    public function create(Note $note, Learner $learner)
+    public function create(Note $note,  User $user)
     {
-        return view('learners/create_note')->with(['note' => $note, 'learner' => $learner]);
+        return view('learners/create_note')->with(['note' => $note, 'user' => $user]);
     }
 
-    public function edit(Note $note, Learner $learner)
+    public function edit(Note $note, User $user)
     {
-        return view('learners/edit_note')->with(['note' => $note, 'learner' => $learner]);
+        return view('learners/edit_note')->with(['note' => $note, 'user' => $user]);
     }
 
     public function update(Request $request, Note $note)

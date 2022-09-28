@@ -42,7 +42,7 @@
             <button type="submit">選択肢を削除する</button> 
         </form>
         <div class="back">
-            [<a href="/learners/{{ $learner->id }}">back</a>]
+            [<a href="/learners">back</a>]
         </div>
     </body>
 </html>

@@ -19,13 +19,15 @@ use App\Http\Controllers\QuizController;
 */
 Auth::routes();
 
-Route::get('/learners/{learner}', [StudyController::class, 'index']);
+Route::group(['middleware' => ['auth']], function(){
+
+Route::get('/learners', [StudyController::class, 'index'])->middleware('auth');
 
 Route::get('/learners/note/{note}', [NoteController::class, 'show']);
 
 Route::get('/learners/note/edit_note/{note}', [NoteController::class, 'edit']);
 
-Route::get('/learners/learners/create_note/{learner}', [NoteController::class, 'create']);
+Route::get('/learners/create_note', [NoteController::class, 'create']);
 
 Route::get('/learners/create_choice/{quiz}', [ChoiceController::class, 'create']);
 
@@ -47,7 +49,7 @@ Route::get('/learners/quizzes/{quiz}', [QuizController::class, 'show']);
 
 Route::get('/learners/quizzes/show_quiz/{learner}', [QuizController::class, 'show_quiz']);
 
-Route::get('/learners/quiz_result', [QuizController::class, 'result']);
+Route::get('/learners/quizzes/learners/quiz_result', [QuizController::class, 'result']);
 
 Route::post('/quizzes', [QuizController::class, 'store']);
 
@@ -73,8 +75,7 @@ Route::delete('/learners/goals/{goal}', [GoalController::class, 'delete']);
 
 Route::delete('/learners/choices/{choice}', [ChoiceController::class, 'delete']);
 
-
-
+});
 
 
 
