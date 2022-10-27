@@ -36,19 +36,19 @@ class ChoiceController extends Controller
     {
         $input_choice = $request['choice'];
         $choice->fill($input_choice)->save();
-        return redirect('/learners/quizzes/{quiz}/' . $quiz->id);
+        return redirect('/learners');
     }
 
     public function delete(Choice $choice)
     {
         $choice->delete();
-        return redirect('/learners/note/{note}');
+        return redirect('/learners');
     }
 
     public function store(Request $request, Choice $choice, Quiz $quiz)
     {
         $input = $request['choice'];
         $choice->fill($input)->save();
-        return redirect('/learners/quizzes/' . $quiz->id);
+        return redirect('/learners');
     }
 }

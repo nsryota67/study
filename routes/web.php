@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ChoiceController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChoiceController;
 use App\Http\Controllers\StudyController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\GoalController;
@@ -17,11 +17,20 @@ use App\Http\Controllers\QuizController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+require __DIR__.'/auth.php';
 
 Route::group(['middleware' => ['auth']], function(){
-
-Route::get('/learners', [StudyController::class, 'index'])->middleware('auth');
+    
+Route::get('/learners', [StudyController::class, 'index'])->name('index');
 
 Route::get('/learners/note/{note}', [NoteController::class, 'show']);
 
@@ -51,6 +60,10 @@ Route::get('/learners/quizzes/show_quiz/{learner}', [QuizController::class, 'sho
 
 Route::get('/learners/quizzes/learners/quiz_result', [QuizController::class, 'result']);
 
+Route::get('/reply/like/{id}', [RepliesController::class, 'like'])->name('reply.like');
+
+Route::get('/reply/unlike/{id}', [RepliesController::class, 'unlike'])->name('reply.unlike');
+
 Route::post('/quizzes', [QuizController::class, 'store']);
 
 Route::post('/notes', [NoteController::class, 'store']);
@@ -77,6 +90,3 @@ Route::delete('/learners/choices/{choice}', [ChoiceController::class, 'delete'])
 
 });
 
-
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
