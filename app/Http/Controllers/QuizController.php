@@ -68,6 +68,7 @@ class QuizController extends Controller
         return view('learners/quiz_result')->with([
             'answer_arr' => $answer_arr,
             'count' => $count,
+            'quizzes' => $quizzes,
             'choices' => $choices
         ]);
     }
@@ -94,7 +95,7 @@ class QuizController extends Controller
     public function delete(Quiz $quiz)
     {
         $quiz->delete();
-        return redirect('/learners/note/{note}');
+        return redirect('/learners');
     }
 
     public function challenge(Quiz $quiz, Choice $choice)

@@ -4,53 +4,68 @@
         <meta charset="utf-8">
         <title>Edit Note</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> --}}
     </head>
-    <body>
-    <h1 class="title">ノートの編集画面です</h1>
-    <div class="content">
+    <body class="bg-blue-50">
+        <div class="p-4 bg-white rounded-lg shadow md:flex md:items-center md:justify-between md:p-10 dark:bg-gray-800">
+            <ul class="flex-wrap items-center mt-3 text-2xl text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li class="h-0">
+                    <a href="/learners">[戻る]</a>
+                </li>
+            </ul>
+        </div>
+        <h1 class="text-4xl text-green-700 text-center h-0 font-semibold pt-5">ノートの編集画面です</h1>
         <form action="/edit_note/{{ $note->id }}" method="POST">
             @method('PUT')
             @csrf
-            <div class="title">
-                <h2>タイトル</h2>
-                <input type="text" name="note[title]" value="{{ $note->title }}"/>
-            </div>
-            <div class="body">
-                <h2>内容</h2>
-                <textarea name="note[body]" value="{{ $note->body }}"></textarea>
-            </div>
-            <div class="subject">
-                <p>科目名を入力してください</p>
-                <input type="text" name="note[subject]" value="{{ $note->subject }}"/>
-            </div>
-            <div class="category">
-                <p>分野名を入力してください</p>
-                <input type="text" name="note[category]" value="{{ $note->category }}"/>
-            </div>
+        <div class="text-2xl text-left">
+            <p class="text-red-700 pt-20">*が付いている入力欄は必須です</p>
+            <div class="pt-10">
             
-            <div class="grade">
-                <p>学年を選択してください</p>
-                <select name="note[grade]">
-                    <option value="J1">中学1年生</option>
-                    <option value="J2">中学2年生</option>
-                    <option value="J3">中学3年生</option>
-                    <option value="H1">高校1年生</option>
-                    <option value="H2">高校2年生</option>
-                    <option value="H3">高校3年生</option>
-                    <option value="U1">学部1年生</option>
-                    <option value="U2">学部2年生</option>
-                    <option value="U3">学部3年生</option>
-                    <option value="U4">学部4年生</option>
-                    <option value="社会人">社会人</option>
-                </select>
-            </div>
-            <div class="comment">
-                <p>コメントを残す</p>
-                <textarea name="note[comment]" value="{{ $note->comment }}"></textarea>
-            </div>
-            <input type="submit" value="保存"/>
-        </form>
-    </div>
+                <div class="title">
+                    <h2>タイトル</h2>
+                    <input type="text" name="note[title]" value="{{ $note->title }}"/>
+                </div>
+                <div class="body">
+                    <h2>内容</h2>
+                    <textarea name="note[body]" rows="30" cols="80">{{ $note->body }}</textarea>
+                </div>
+                <div class="subject">
+                    <p>科目名を入力してください</p>
+                    <input type="text" name="note[subject]" value="{{ $note->subject }}"/>
+                </div>
+                <div class="category">
+                    <p>分野名を入力してください</p>
+                    <input type="text" name="note[category]" value="{{ $note->category }}"/>
+                </div>
+                
+                <div class="grade">
+                    <p>学年を選択してください</p>
+                    <select name="note[grade]">
+                        <option value="J1">中学1年生</option>
+                        <option value="J2">中学2年生</option>
+                        <option value="J3">中学3年生</option>
+                        <option value="H1">高校1年生</option>
+                        <option value="H2">高校2年生</option>
+                        <option value="H3">高校3年生</option>
+                        <option value="U1">学部1年生</option>
+                        <option value="U2">学部2年生</option>
+                        <option value="U3">学部3年生</option>
+                        <option value="U4">学部4年生</option>
+                        <option value="社会人">社会人</option>
+                    </select>
+                </div>
+                <div class="comment">
+                    <p>コメントを残す</p>
+                    <textarea name="note[comment]"  rows="5" cols="80">{{ $note->comment }}</textarea>
+                </div>
+                <div class="pt-10 text-center">
+                    <button class="bg-blue-500 hover:bg-blue-400 text-black font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                        <input type="submit" value="保存"/>
+                    </button>
+                </div>
+            </form>
+        </div>
     </body>
 </html>

@@ -27,19 +27,19 @@ class NoteController extends Controller
     {
         $input_note = $request['note'];
         $note->fill($input_note)->save();
-        return redirect('/notes/' . $note->id);
+        return redirect('/learners');
     }
 
     public function delete(Note $note)
     {
         $note->delete();
-        return redirect('/learners/note/{note}');
+        return redirect('/learners');
     }
 
     public function store(Request $request, Note $note)
     {
         $input = $request['note'];
         $note->fill($input)->save();
-        return redirect('/notes/' . $note->id);
+        return redirect('/learners');
     }
 }

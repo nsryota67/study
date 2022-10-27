@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <title>select challenge quiz</title>
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> --}}
     </head>
     <body>
         <h1>挑戦するクイズを選ぼう！</h1>
